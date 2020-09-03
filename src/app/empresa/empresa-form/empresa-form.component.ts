@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { EmpresaService } from '../empresa.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from '../empresa';
 
 @Component({
@@ -12,12 +12,20 @@ import { Empresa } from '../empresa';
 export class EmpresaFormComponent implements OnInit {
 
   empresa: Empresa;
+  empresaForm;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
-    private empresaService: EmpresaService
-  ) { 
-
+    private empresaService: EmpresaService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.empresa = {
+      id: null,
+      cnpj: '',
+      razaoSocial: ''
+    } 
+    this.empresaForm = this.formBuilder.group(this.empresa)
   }
 
   ngOnInit() {
@@ -28,4 +36,11 @@ export class EmpresaFormComponent implements OnInit {
       }
   }
 
+  onSubmit(empresaData) {
+    this.empresaService.save(empresaData);
+    this.empresaForm.reset();
+
+    console.warn('Salvo com sucesso!', empresaData);
+    this.router.navigate(['/empresa/list']);
+  }
 }

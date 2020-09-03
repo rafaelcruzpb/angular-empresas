@@ -12,10 +12,13 @@
       <th scope="row">{{ empresa.id }}</th>
       <td>{{ empresa.cnpj }}</td>
       <td>{{ empresa.razaoSocial }}</td>
-      <td><a [routerLink]="['/empresa/edit', empresa.id]" class="btn btn-primary btn-sm">Editar</a></td>
+      <td class="actions">
+        <a [routerLink]="['/empresa/edit', empresa.id]" class="btn btn-primary btn-sm">Editar</a>
+        <a [routerLink]="['/empresa/delete', empresa.id]" class="btn btn-danger btn-sm">Excluir</a>
+      </td>
     </tr>
     <tr *ngIf="!empresas.length" class="text-center">
-      <td colspan="3">Sem empresas cadastradas.</td>
+      <td colspan="4">Sem empresas cadastradas.</td>
     </tr>
   </tbody>
 </table>

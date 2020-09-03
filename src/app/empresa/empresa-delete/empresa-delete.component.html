@@ -1,0 +1,16 @@
+<form id="formDelete" [formGroup]="empresaDelete" (ngSubmit)="onSubmit(empresaDelete.value)">
+  <input type="hidden" formControlName="id" [(ngModel)]="empresa.id">
+  <div class="container">
+    <div class="row justify-content-center">
+      <h3>Deseja mesmo remover a empresa "{{empresa.razaoSocial}}"?</h3>
+    </div>
+    <div class="row">
+      <div class="col-sm text-right">
+        <a [routerLink]="['/empresa/list']" class="btn btn-primary">Voltar</a>
+      </div>
+      <div class="col-sm text-left">
+        <button type="submit" class="btn btn-danger">Remover</button>
+      </div>
+    </div>
+  </div>
+</form>
